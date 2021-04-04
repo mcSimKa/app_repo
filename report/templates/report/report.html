@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %} Releases count {% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <div>
+        <TABLE  WIDTH="80%">
+            <tr>
+                <td>
+                    <label for="report_date">Report Date:</label>
+                    <input type="date" id="report_date" name="report_date" value="{{report_date}}">
+                    <input type="submit" value="Get report">
+                </td>
+                <td span style="float: right;">
+                    <a href="{% url 'home' %}">List of reports</a>
+                </td>
+
+            </tr>
+
+        </TABLE>
+    </div>
+</form>
+  <div class="row">
+    <div class="col-md">
+        <TABLE BORDER="5"    WIDTH="80%"   CELLPADDING="4" CELLSPACING="3">
+           <TR>
+              <TH COLSPAN="2"><BR><H3>IBDR Releases on {{report_date}}</H3>
+              </TH>
+           </TR>
+           <TR>
+              <TH>Release</TH>
+              <TH>Count</TH>
+           </TR>
+                    {% for version in versions %}
+                                <TR>
+                                    <TD> {{version.aRelease }} </TD>
+                                    <TD> {{version.aInstances}} </TD>
+                                </TR>
+                    {% endfor %}
+        </TABLE>
+    </DIV>
+    <div class="col">
+        <TABLE  BORDER="5"    WIDTH="80%"   CELLPADDING="4" CELLSPACING="3">
+           <TR>
+              <TH COLSPAN="2"><BR><H3>Client OS {{report_date}}</H3>
+              </TH>
+           </TR>
+           <TR>
+              <TH>Release</TH>
+              <TH>Count</TH>
+           </TR>
+                    {% for client_ik in clients_os %}
+                                <TR>
+                                    <TD> {{client_ik.os}}  </TD>
+                                    <TD> {{client_ik.count}}</TD>
+                                </TR>
+                    {% endfor %}
+        </TABLE>
+    </DIV>
+  </div>
+
+{% endblock %}

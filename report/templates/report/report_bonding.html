@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} Bondings {% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <div>
+        <TABLE  WIDTH="80%">
+            <tr>
+                <td>
+                    <label for="report_date">Report Date:</label>
+                    <input type="date" id="report_date" name="report_date" value="{{report_date}}">
+                    <input type="submit" value="Get report">
+                </td>
+                <td span style="float: right;">
+                    <a href="{% url 'home' %}">List of reports</a>
+                </td>
+            </tr>
+        </TABLE>
+    </div>
+</form>
+  <div class="row">
+    <div class="col-md">
+        <TABLE BORDER="5"    WIDTH="80%"   CELLPADDING="4" CELLSPACING="3">
+           <TR>
+              <TH COLSPAN="6"><BR><H3>Configured bondings on {{report_date}}</H3>
+              </TH>
+           </TR>
+           <TR>
+              <TH>UUID</TH>
+              <TH>hostname</TH>
+              <TH>IP</TH>
+              <TH>Model</TH>
+               <TH>Replication</TH>
+               <TH>Build</TH>
+           </TR>
+                    {% for bonding in bonding_set %}
+                                <TR>
+                                    <TD> {{bonding.uuid }} </TD>
+                                    <TD> {{bonding.hostname }} </TD>
+                                    <TD> {{bonding.ip_address }} </TD>
+                                    <TD> {{bonding.model }} </TD>
+                                    <TD> {{bonding.repl_mode }} </TD>
+                                    <TD> {{bonding.version }} </TD>
+
+                                </TR>
+                    {% endfor %}
+        </TABLE>
+    </DIV>
+
+  </div>
+
+
+{% endblock %}

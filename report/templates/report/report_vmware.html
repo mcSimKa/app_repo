@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %} VMware {% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <div>
+        <TABLE  WIDTH="50%">
+            <tr>
+                <td>
+                    <label for="report_date">Report Date:</label>
+                    <input type="date" id="report_date" name="report_date" value="{{report_date}}">
+                    <input type="submit" value="Get report">
+                </td>
+                <td span style="float: right;">
+                    <a href="{% url 'home' %}">List of reports</a>
+                </td>
+
+            </tr>
+
+        </TABLE>
+    </div>
+</form>
+  <div class="row">
+    <div class="col-md">
+        <TABLE BORDER="5"    WIDTH="50%"   CELLPADDING="4" CELLSPACING="3">
+           <TR>
+              <TH COLSPAN="3"><BR><H3>VMware version distribution on {{report_date}}</H3>
+              </TH>
+           </TR>
+           <TR>
+              <TH>IDR firmware</TH>
+              <TH>VCenter</TH>
+              <TH>Amount</TH>
+           </TR>
+                    {% for vmware in vmware_set %}
+                                <TR>
+                                    <TD> {{vmware.version }} </TD>
+                                    <TD> {{vmware.vmversion }} </TD>
+                                    <TD> {{vmware.amount }} </TD>
+                                </TR>
+                    {% endfor %}
+        </TABLE>
+    </DIV>
+
+  </div>
+
+
+{% endblock %}

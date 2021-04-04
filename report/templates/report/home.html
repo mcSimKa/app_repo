@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %} Appliance reports {% endblock %}
+
+{% block content %}
+<TABLE>
+    <TR>
+      <TH COLSPAN="1"><BR><H3>Reports that are available</H3>
+      </TH>
+   </TR>
+    <TR>
+        <TD><a href="{% url 'report' %}">Main report</a></TD>
+    </TR>
+    <TR>
+        <TD><a href="{% url 'report_bonding' %}"> Appliances with enabled Bonding</a></TD>
+    </TR>
+    <TR>
+        <TD><a href="{% url 'report_missing' %}"> Missing network implementation</a></TD>
+    </TR>
+    <TR>
+        <TD><a href="{% url 'report_vmware' %}"> VMware version distribution</a></TD>
+    </TR>
+    <TR>
+        <TD><a href="{% url 'report_engines' %}"> Hyper-V Ignyte usage count</a></TD>
+    </TR>
+    <TR>
+        <TD><a href="{% url 'report_values' %}"> Single CFA stat</a></TD>
+    </TR>
+
+</TABLE>
+{% endblock %}

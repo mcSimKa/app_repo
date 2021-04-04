@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} Releases count {% endblock %}
+
+{% block content %}
+<TABLE BORDER="5"    WIDTH="20%"   CELLPADDING="4" CELLSPACING="3">
+   <TR>
+      <TH COLSPAN="2"><BR><H3>IBDR Releases on {{report_date}}</H3>
+      </TH>
+   </TR>
+   <TR>
+      <TH>Release</TH>
+      <TH>Count</TH>
+   </TR>
+            {% for version in versions %}
+                        <TR>
+                            <TD> {{version.aRelease }} </TD>
+                            <TD> {{version.aInstances}} </TD>
+                        </TR>
+            {% endfor %}
+</TABLE>
+<p>
+
+
+</p>
+<TABLE BORDER="5"    WIDTH="20%"   CELLPADDING="4" CELLSPACING="3">
+   <TR>
+      <TH COLSPAN="2"><BR><H3>Client OS {{report_date}}</H3>
+      </TH>
+   </TR>
+   <TR>
+      <TH>Release</TH>
+      <TH>Count</TH>
+   </TR>
+            {% for client_ik in clients_os %}
+                        <TR>
+                            <TD> {{client_ik.os}}  </TD>
+                            <TD> {{client_ik.count}}</TD>
+                        </TR>
+            {% endfor %}
+</TABLE>
+{% endblock %}

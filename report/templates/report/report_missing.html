@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %} Missing implementations {% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <div>
+        <TABLE  WIDTH="80%">
+            <tr>
+                <td>
+                    <label for="report_date">Report Date:</label>
+                    <input type="date" id="report_date" name="report_date" value="{{report_date}}">
+                    <input type="submit" value="Get report">
+                </td>
+                <td span style="float: right;">
+                    <a href="{% url 'home' %}">List of reports</a>
+                </td>
+            </tr>
+        </TABLE>
+    </div>
+</form>
+  <div class="row">
+    <div class="col-md">
+        <TABLE BORDER="5"    WIDTH="80%"   CELLPADDING="4" CELLSPACING="3">
+           <TR>
+              <TH COLSPAN="7"><BR><H3>Missing network implementations on {{report_date}}</H3>
+              </TH>
+           </TR>
+           <TR>
+              <TH>UUID</TH>
+              <TH>hostname</TH>
+              <TH>IP</TH>
+              <TH>Model</TH>
+               <TH>Build</TH>
+              <TH>property</TH>
+               <TH>value</TH>
+           </TR>
+                    {% for missing_parameter in missing_implementations %}
+                                <TR>
+                                    <TD> {{missing_parameter.uuid }} </TD>
+                                    <TD> {{missing_parameter.hostname }} </TD>
+                                    <TD> {{missing_parameter.ip_address }} </TD>
+                                    <TD> {{missing_parameter.model }} </TD>
+                                    <TD> {{missing_parameter.version }} </TD>
+                                    <TD> {{missing_parameter.property_name }} </TD>
+                                    <TD> {{missing_parameter.data_value }} </TD>>
+                                </TR>
+                    {% endfor %}
+        </TABLE>
+    </DIV>
+
+  </div>
+
+
+{% endblock %}

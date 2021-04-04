@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %} Single CFA statistics{% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <div>
+        <TABLE  WIDTH="80%">
+            <tr>
+                <td>
+                    <label for="report_date">Report Date:</label>
+                    <input type="date" id="report_date" name="report_date" value="{{report_date}}">
+                    <p>
+                     <label for="license">License of CFA:</label>
+                    <input type="text" id="license" name="license">
+                    </p>
+                    <input type="submit" value="Get report">
+                </td>
+                <td span style="float: right;">
+                    <a href="{% url 'home' %}">List of reports</a>
+                </td>
+            </tr>
+        </TABLE>
+    </div>
+</form>
+  <div class="row">
+    <div class="col-md">
+        <TABLE BORDER="5"    WIDTH="80%"   CELLPADDING="4" CELLSPACING="3">
+           <TR>
+              <TH COLSPAN="2"><BR><H3>Appliance statistics on {{report_date}}</H3>
+              </TH>
+           </TR>
+           <TR>
+              <TH>Property</TH>
+              <TH>Value</TH>
+
+           </TR>
+                    {% for parameter in parameters %}
+                                <TR>
+                                    <TD> {{parameter.property_name }} </TD>
+                                    <TD> {{parameter.string_value }} </TD>
+                                </TR>
+                    {% endfor %}
+        </TABLE>
+    </DIV>
+
+  </div>
+
+
+{% endblock %}
